@@ -26,9 +26,4 @@ public class AppConfiguration {
         return cmfb;
     }
 
-    @Bean
-    public LayoutDialect layoutDialect() {
-        return new LayoutDialect();
-    }
-
 }

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+    <block th:fragment="topnav">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" th:href="@{/}">
+                <img th:src="@{/images/TheORCS-logo.png}"/>
+                TheORCS
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <!--/* Beginning of the actual Menu */-->
+                    <th:block sec:authorize="isAuthenticated()">
+                        <li class="nav-item dropdown" th:if="${!_topnav.chronicles.isEmpty()}">
+                            <a class="nav-link dropdown-toggle" hre="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{includes.navs.topnav.chronicles}">
+                                Chronicles
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" th:href="@{'/secure/chronicle/' + ${chro.id}}" th:each="chro : ${_topnav.chronicles}" th:text="${chro.title}">Chronicle's title</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:text="#{includes.navs.topnav.createchronicle}" th:href="@{/secure/chronicle/create}">Create a Chronicle</a>
+                        </li>
+                    </th:block>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn btn-outline-danger my-2 my-sm-0" th:text="#{includes.navs.topnav.signin}">Login/Sign In</a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-danger my-2 my-sm-0" th:text="#{includes.navs.topnav.logout}">Logout</a>
+                </form>
+            </div>
+        </nav>
+    </block>
+
+    <block th:fragment="chronav">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" th:href="@{/}">
+                <img th:src="@{/images/TheORCS-logo.png}"/>
+                TheORCS
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{'/secure/chronicle/' + ${_chronicle.id}}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown" th:with="unreadMsgs = ${@MessagingService.getUnreadMessageCount(session._currentCharacter)}">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCharacter" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{includes.navs.topnav.character.title}">
+                            Character
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownCharacter">
+                            <a class="dropdown-item" th:href="@{'/secure/chronicle/' + ${_chronicle.id} + '/character/background'}" th:text="#{includes.navs.topnav.character.background}">Background</a>
+                            <a class="dropdown-item" th:href="@{'/secure/chronicle/' + ${_chronicle.id} + '/character/description'}" th:text="#{includes.navs.topnav.character.description}">Description</a>
+                            <a class="dropdown-item" th:href="@{'/secure/chronicle/' + ${_chronicle.id} + '/messaging/lists'}" th:text="#{includes.navs.topnav.messaging.contact_list}">Contact Lists</a>
+                            <a class="dropdown-item" th:href="@{'/secure/chronicle/' + ${_chronicle.id} + '/messaging/contacts'}" th:text="#{includes.navs.topnav.messaging.contacts}">Contacts</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{'/secure/chronicle/' + ${_chronicle.id} + '/messaging/options'}" th:text="#{includes.navs.topnav.messaging.options}">Options</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown" th:with="unreadMsgs = ${@MessagingService.getUnreadMessageCount(session._currentCharacter)}">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:utext="${unreadMsgs == 0} ? #{includes.navs.topnav.messaging} : #{includes.navs.topnav.messaging_unread}">
+                            Messaging
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{'/secure/chronicle/' + ${_chronicle.id} + '/messaging/write'}" th:text="#{includes.navs.topnav.messaging.write}">Write a Message</a>
+                            <a class="dropdown-item" th:href="@{'/secure/chronicle/' + ${_chronicle.id} + '/messaging/folders'}" th:utext="${unreadMsgs == 0} ? #{includes.navs.topnav.messaging.folders} : #{includes.navs.topnav.messaging.folders_unread(${unreadMsgs})}">Folders</a>
+                            <a class="dropdown-item" th:href="@{'/secure/chronicle/' + ${_chronicle.id} + '/messaging/lists'}" th:text="#{includes.navs.topnav.messaging.contact_list}">Contact Lists</a>
+                            <a class="dropdown-item" th:href="@{'/secure/chronicle/' + ${_chronicle.id} + '/messaging/contacts'}" th:text="#{includes.navs.topnav.messaging.contacts}">Contacts</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{'/secure/chronicle/' + ${_chronicle.id} + '/messaging/options'}" th:text="#{includes.navs.topnav.messaging.options}">Options</a>
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-danger my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
+                </form>
+                <form class="form-inline my-2 my-lg-0" sec:authorize-acl="${_chronicle} :: '16'">
+                    <a class="btn btn-outline-danger my-2 my-sm-0 mr-sm-2" th:text="#{includes.navs.chronav.admin}" th:href="@{'/secure/chronicle/' + ${_chronicle.id} + '/admin/'}">Admin</a>
+                </form>
+                <form class="form-inline my-2 my-lg-0">
+                    <a th:href="@{/}" class="btn btn-outline-danger my-2 my-sm-0" th:text="#{includes.navs.chronav.exit}">Exit</a>
+                </form>
+            </div>
+        </nav>
+    </block>
+
+    <block th:fragment="footer">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-2">
+            <a class="navbar-brand" href="#">Fixed bottom</a>
+        </nav>
+    </block>
+
+</body>
+</html>
