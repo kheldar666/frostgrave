@@ -17,12 +17,22 @@
     <footer th:fragment="footer">
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 
-        <script th:src="@{/webjars/popper.js/dist/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
-        <script th:src="@{/webjars/font-awesome/svg-with-js/js/fontawesome-all.js}"></script>
-
+        <script th:src="@{/webjars/font-awesome/js/all.js}"></script>
+        <script>
+            /*<![CDATA[*/
+            $j = jQuery.noConflict();
+            $j(document).ready(function() {
+                $j('#loginButton').on('click', function(){
+                    $j("#loginForm-modal").modal("show");
+                    return false;
+                });
+            });
+            /*]]>*/
+        </script>
     </footer>
 </body>
 </html>
