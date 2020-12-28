@@ -20,11 +20,8 @@ import java.util.List;
 public class WarbandServiceImpl extends AbstractServiceImpl<Warband> implements WarbandService {
     private final UserService userService;
 
-    private final WarbandService warbandService;
-
-    public WarbandServiceImpl(UserService userService, WarbandService warbandService) {
+    public WarbandServiceImpl(UserService userService) {
         this.userService = userService;
-        this.warbandService= warbandService;
     }
 
     @Override
