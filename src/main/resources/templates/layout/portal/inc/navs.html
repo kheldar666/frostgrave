@@ -23,16 +23,27 @@
 
                     <!--/* Beginning of the actual Menu */-->
                     <th:block sec:authorize="isAuthenticated()">
-                        <!--<li class="nav-item dropdown" th:if="${!_topnav.chronicles.isEmpty()}">
-                            <a class="nav-link dropdown-toggle" hre="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{includes.navs.topnav.chronicles}">
-                                Chronicles
+                        <li class="nav-item dropdown" th:if="${!_topnav.campaigns.isEmpty()}">
+                            <a class="nav-link dropdown-toggle" hre="#" id="navbarDropdownCampaigns" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{includes.navs.topnav.campaign}">
+                                Campaigns
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" th:href="@{'/secure/chronicle/' + ${chro.id}}" th:each="chro : ${_topnav.chronicles}" th:text="${chro.title}">Chronicle's title</a>
+                                <a class="dropdown-item" th:href="@{'/secure/campaign/' + ${campaign.id}}" th:each="campaign : ${_topnav.campaigns}" th:text="${campaign.name}">Campaign's name</a>
                             </div>
-                        </li> -->
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" th:text="#{includes.navs.topnav.createcampaign}" th:href="@{/secure/campaign/create}">Create a Campaign</a>
+                        </li>
+                        <li class="nav-item dropdown" th:if="${!_topnav.warbands.isEmpty()}">
+                            <a class="nav-link dropdown-toggle" hre="#" id="navbarDropdownWarbands" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{includes.navs.topnav.warbands}">
+                                Warbands
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" th:href="@{'/secure/warband/' + ${warband.id}}" th:each="warband : ${_topnav.warbands}" th:text="${warband.name}">Warband's name</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:text="#{includes.navs.topnav.createwarband}" th:href="@{/secure/warband/create}">Create a Warband</a>
                         </li>
                     </th:block>
                 </ul>

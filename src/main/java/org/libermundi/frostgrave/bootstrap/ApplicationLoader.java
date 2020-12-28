@@ -1,6 +1,7 @@
 package org.libermundi.frostgrave.bootstrap;
 
 import lombok.extern.slf4j.Slf4j;
+import org.libermundi.frostgrave.services.campaign.CampaignService;
 import org.libermundi.frostgrave.services.security.UserService;
 import org.libermundi.frostgrave.services.security.AuthorityService;
 import org.libermundi.frostgrave.services.security.SecurityService;
@@ -15,11 +16,15 @@ public class ApplicationLoader implements ApplicationListener<ContextRefreshedEv
 	private final AuthorityService authorityService;
 	private final UserService userService;
 	private final SecurityService securityService;
+	private final CampaignService campaignService;
 
-	public ApplicationLoader(AuthorityService authorityService, UserService userService, SecurityService securityService) {
+	public ApplicationLoader(
+			AuthorityService authorityService, UserService userService, SecurityService securityService,
+			CampaignService campaignService) {
 		this.authorityService = authorityService;
 		this.userService = userService;
 		this.securityService = securityService;
+		this.campaignService = campaignService;
 	}
 
 	@Override
@@ -38,6 +43,7 @@ public class ApplicationLoader implements ApplicationListener<ContextRefreshedEv
 
 		userService.initData();
 		authorityService.initData();
+		campaignService.initData();
 
 		securityService.restoreUser();
 
