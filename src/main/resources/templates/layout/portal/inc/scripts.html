@@ -9,12 +9,12 @@
 
 </head>
 <body>
-    <div th:fragment="ckeditor">
+    <block th:fragment="ckeditor">
         <script th:src="@{/webjars/ckeditor/full/ckeditor.js}"></script>
         <script th:src="@{/js/ckeditor.config.js}"></script>
-    </div>
+    </block>
 
-    <footer th:fragment="footer">
+    <block th:fragment="footer">
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
@@ -22,17 +22,6 @@
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
         <script th:src="@{/webjars/font-awesome/js/all.js}"></script>
-        <script>
-            /*<![CDATA[*/
-            $j = jQuery.noConflict();
-            $j(document).ready(function() {
-                $j('#loginButton').on('click', function(){
-                    $j("#loginForm-modal").modal("show");
-                    return false;
-                });
-            });
-            /*]]>*/
-        </script>
-    </footer>
+    </block>
 </body>
 </html>

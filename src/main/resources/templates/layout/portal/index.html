@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <head lang="en">
+            <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE" th:text="#{product.name}">FCM</title>
+            <!--/*/ <th:block th:include="/layout/portal/inc/scripts :: header"></th:block> /*/-->
+
+            <!--/*/ <th:block th:include="/layout/portal/inc/scripts :: ckeditor" th:if="${useCK == true}"></th:block> /*/-->
+        </head>
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="/layout/portal/inc/navs :: topnav"></th:block> /*/-->
+
+        <div class="container-fluid" id="maincontainer">
+            <div class="row my-3">
+                <div class="col">
+                    Left Column
+                </div>
+                <div class="col-6">
+                    <section layout:fragment="content" th:remove="tag">
+                        Central Block
+                    </section>
+                </div>
+                <div class="col">Right Column</div>
+            </div>
+        </div>
+
+        <!--/*/ <th:block th:include="/layout/portal/inc/navs :: footer"></th:block> /*/-->
+
+        <!--/*/ <th:block th:include="/layout/portal/inc/scripts :: footer"></th:block> /*/-->
+
+        <!--/*/ <th:block th:include="/layout/utils/debug :: debug" th:if="${session._showDebug == true}"></th:block> /*/-->
+
+        <!--/*/ <th:block th:include="/layout/utils/debug :: dump" th:if="${session._showDebug == true}"></th:block> /*/-->
+
+
+    </body>
+</html>

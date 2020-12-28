@@ -23,26 +23,21 @@
 
                     <!--/* Beginning of the actual Menu */-->
                     <th:block sec:authorize="isAuthenticated()">
-                        <li class="nav-item dropdown" th:if="${!_topnav.chronicles.isEmpty()}">
+                        <!--<li class="nav-item dropdown" th:if="${!_topnav.chronicles.isEmpty()}">
                             <a class="nav-link dropdown-toggle" hre="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{includes.navs.topnav.chronicles}">
                                 Chronicles
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" th:href="@{'/secure/chronicle/' + ${chro.id}}" th:each="chro : ${_topnav.chronicles}" th:text="${chro.title}">Chronicle's title</a>
                             </div>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
-                            <a class="nav-link" th:text="#{includes.navs.topnav.createchronicle}" th:href="@{/secure/chronicle/create}">Create a Chronicle</a>
+                            <a class="nav-link" th:text="#{includes.navs.topnav.createcampaign}" th:href="@{/secure/campaign/create}">Create a Campaign</a>
                         </li>
                     </th:block>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <a sec:authorize="!isAuthenticated()" id="loginButton" class="btn btn-outline-danger my-2 my-sm-0" th:text="#{includes.navs.topnav.signin}">Login/Sign In</a>
-                    <div sec:authorize="!isAuthenticated()" layout:insert="/layout/components/modal :: modal(modalId='loginForm', modalHeader = 'Please Sign In')" th:remove="tag">
-                        <p layout:fragment="modal-body">
-                            <!--/*/ <th:block th:include="/layout/components/login :: form"></th:block> /*/-->
-                        </p>
-                    </div>
+                    <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn btn-outline-danger my-2 my-sm-0" th:text="#{includes.navs.topnav.signin}">Login/Sign In</a>
                     <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-danger my-2 my-sm-0" th:text="#{includes.navs.topnav.logout}">Logout</a>
                 </form>
             </div>
