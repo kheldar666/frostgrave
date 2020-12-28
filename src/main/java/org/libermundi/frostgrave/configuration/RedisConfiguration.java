@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Profile;
 import redis.embedded.RedisServer;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 @Configuration
 @Profile("dev")
@@ -22,8 +21,4 @@ public class RedisConfiguration {
         redisServer.start();
     }
 
-    @PreDestroy
-    public void preDestroy() {
-        redisServer.stop();
-    }
 }
