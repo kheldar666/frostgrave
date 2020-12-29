@@ -122,4 +122,11 @@ public class SoldierFactory {
 
         return soldier;
     }
+
+    public static Soldier getSoldier(SoldierType soldierType, Warband warband) {
+        Soldier soldier = SoldierFactory.getSoldier(soldierType);
+                soldier.setWarband(warband);
+        return soldier;
+    }
+
 }

@@ -20,7 +20,7 @@ public class NameGenerator {
 	};
 
 	public NameGenerator(int lengthOfName) {
-		if (lengthOfName < 5 || lengthOfName > 10) {
+		if (lengthOfName < 5 || lengthOfName > 15) {
 			System.out.println("Setting default length to 7");
 			lengthOfName = 7;
 		}
@@ -30,8 +30,7 @@ public class NameGenerator {
 
 	public String getName() {
 		for (;;) {
-			Random randomNumberGenerator = new Random(Calendar.getInstance()
-					.getTimeInMillis());
+			Random randomNumberGenerator = new Random();
 
 			char[] nameInCharArray = new char[length];
 
