@@ -34,9 +34,9 @@ public class Warband extends StatefulEntity {
     private Apprentice apprentice;
 
     @OneToMany(
-            mappedBy = "warband",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+        mappedBy = "warband",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
     )
     private Set<Soldier> soldiers = Sets.newHashSet();
 

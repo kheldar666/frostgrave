@@ -3,6 +3,7 @@ package org.libermundi.frostgrave.controllers.advice;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.libermundi.frostgrave.domain.jpa.campaign.Campaign;
+import org.libermundi.frostgrave.domain.jpa.warband.Warband;
 import org.libermundi.frostgrave.services.security.SecurityService;
 import org.libermundi.frostgrave.services.warband.WarbandService;
 import org.springframework.ui.Model;
@@ -42,9 +43,9 @@ public class MenuAdvice {
 
             } else {
                 //When User is LoggedIn but using the rest of the site
-                List<Campaign> chronicles = warbandService.findCampaignByUser(securityService.getCurrentUser());
-
-                topNav.put("chronicles", chronicles);
+                List<Campaign> campaigns = warbandService.findCampaignByUser(securityService.getCurrentUser());
+                topNav.put("campaigns", campaigns);
+                topNav.put("warbands", securityService.getCurrentUser().getWarbands());
             }
 
         }

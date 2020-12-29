@@ -8,6 +8,7 @@ import lombok.ToString;
 import org.libermundi.frostgrave.domain.jpa.base.Account;
 import org.libermundi.frostgrave.domain.jpa.base.UidAuditableEntity;
 import org.libermundi.frostgrave.domain.jpa.listeners.PasswordListener;
+import org.libermundi.frostgrave.domain.jpa.warband.Warband;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -71,9 +72,10 @@ public class User extends UidAuditableEntity implements UserDetails, Account {
     private boolean credentialsNonExpired;
     private boolean accountNonLocked;
 
+    @OneToMany(mappedBy = "player")
+    private Set<Warband> warbands;
+
     @Transient
     public String getFullName() {
         return getFirstName() + " " + getLastName();
-    }
-
-}
+    }}

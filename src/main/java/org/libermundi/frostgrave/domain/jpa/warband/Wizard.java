@@ -1,6 +1,7 @@
 package org.libermundi.frostgrave.domain.jpa.warband;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.libermundi.frostgrave.domain.jpa.utils.Picture;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @ToString(of = {"name","school", "level"},callSuper = true)
 public class Wizard extends Figurine {
     @Enumerated(EnumType.STRING)
