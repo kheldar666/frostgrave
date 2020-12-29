@@ -86,8 +86,6 @@ public class WarbandServiceImpl extends AbstractServiceImpl<Warband> implements 
 
             soldiers.add(SoldierFactory.getSoldier(SoldierType.TREASUREHUNTER, warbandInCampaign));
 
-        warbandInCampaign.setSoldiers(soldiers);
-
         getRepository().save(warbandInCampaign);
     }
 }

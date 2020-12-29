@@ -128,5 +128,10 @@ public class SoldierFactory {
                 soldier.setWarband(warband);
         return soldier;
     }
-
+    public static Soldier getSoldier(String name, SoldierType soldierType, Warband warband) {
+        Soldier soldier = SoldierFactory.getSoldier(soldierType);
+        soldier.setName(name);
+        soldier.setWarband(warband);
+        return soldier;
+    }
 }
