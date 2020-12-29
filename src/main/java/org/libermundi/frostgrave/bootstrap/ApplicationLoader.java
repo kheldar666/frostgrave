@@ -5,6 +5,7 @@ import org.libermundi.frostgrave.services.campaign.CampaignService;
 import org.libermundi.frostgrave.services.security.UserService;
 import org.libermundi.frostgrave.services.security.AuthorityService;
 import org.libermundi.frostgrave.services.security.SecurityService;
+import org.libermundi.frostgrave.services.warband.WarbandService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -17,14 +18,16 @@ public class ApplicationLoader implements ApplicationListener<ContextRefreshedEv
 	private final UserService userService;
 	private final SecurityService securityService;
 	private final CampaignService campaignService;
+	private final WarbandService warbandService;
 
 	public ApplicationLoader(
 			AuthorityService authorityService, UserService userService, SecurityService securityService,
-			CampaignService campaignService) {
+			CampaignService campaignService, WarbandService warbandService) {
 		this.authorityService = authorityService;
 		this.userService = userService;
 		this.securityService = securityService;
 		this.campaignService = campaignService;
+		this.warbandService = warbandService;
 	}
 
 	@Override
@@ -44,6 +47,7 @@ public class ApplicationLoader implements ApplicationListener<ContextRefreshedEv
 		userService.initData();
 		authorityService.initData();
 		campaignService.initData();
+		warbandService.initData();
 
 		securityService.restoreUser();
 

@@ -21,19 +21,14 @@ public class CampaignServiceImpl extends AbstractServiceImpl<Campaign> implement
     private final SecurityService securityService;
 
     public CampaignServiceImpl(UserService userService, SecurityService securityService, CampaignRepository campaignRepository) {
+        setRepository(campaignRepository,Campaign.class);
         this.userService = userService;
         this.securityService = securityService;
-        setRepository(campaignRepository,Campaign.class);
     }
 
     @Override
     public Campaign findByName(String name)    {
         return getResultfromOptional(((CampaignRepository)getRepository()).findByName(name));
-    }
-
-    @Override
-    public Campaign createNew() {
-        return new Campaign();
     }
 
     @Override
@@ -44,7 +39,7 @@ public class CampaignServiceImpl extends AbstractServiceImpl<Campaign> implement
 
         User admin = userService.findByUsername("admin");
 
-        Campaign campaign1 = createNew();
+        Campaign campaign1 = new Campaign();
             campaign1.setName("Demo Campaign");
             campaign1.setAdmin(admin);
 

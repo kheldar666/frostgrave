@@ -52,17 +52,12 @@ public class PictureServiceImpl extends AbstractServiceImpl<Picture> implements 
     }
 
     @Override
-    public Picture createNew() {
-        return new Picture();
-    }
-
-    @Override
     public void initData() {
         //Nothing to do
     }
 
     private Picture createNew(byte[] data, String contenttype){
-        Picture picture = createNew();
+        Picture picture = new Picture();
 
         Byte[] dataByte = new Byte[data.length];
 

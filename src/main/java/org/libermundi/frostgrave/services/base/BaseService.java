@@ -62,12 +62,7 @@ public interface BaseService<T extends Identity> {
 	 * @param repository
 	 */
 	void setRepository(UndeletableRepository<T, Long> repository, Class<T> classType);
-	
-	/**
-	 * return a newly created T Object
-	 */
-	T createNew();
-	
+
 	/**
 	 * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
 	 * entity instance completely.

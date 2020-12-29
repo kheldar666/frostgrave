@@ -70,28 +70,17 @@ public class AuthorityServiceImpl extends AbstractServiceImpl<Authority> impleme
 		return hasReachableAuthority(user.getAuthorities(),authority);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.libermundi.theorcs.services.base.BaseService#createNew()
-	 */
-	@Override
-	public Authority createNew() {
-		Authority auth = new Authority();
-
-		return auth;
-	}
-
 	@Override
 	public void initData() {
 		if(log.isDebugEnabled()){
 			log.debug("Initializing Authority Data");
 		}
 
-		Authority a0 = createNew(); a0.setAuthority(SecurityConstants.ROLE_SYSTEM);
-		Authority a1 = createNew(); a1.setAuthority(SecurityConstants.ROLE_ROOT);
-		Authority a2 = createNew(); a2.setAuthority(SecurityConstants.ROLE_ADMIN);
-		Authority a3 = createNew(); a3.setAuthority(SecurityConstants.ROLE_USER);
-		Authority a4 = createNew(); a4.setAuthority(SecurityConstants.ROLE_ANONYMOUS);
+		Authority a0 = new Authority(); a0.setAuthority(SecurityConstants.ROLE_SYSTEM);
+		Authority a1 = new Authority(); a1.setAuthority(SecurityConstants.ROLE_ROOT);
+		Authority a2 = new Authority(); a2.setAuthority(SecurityConstants.ROLE_ADMIN);
+		Authority a3 = new Authority(); a3.setAuthority(SecurityConstants.ROLE_USER);
+		Authority a4 = new Authority(); a4.setAuthority(SecurityConstants.ROLE_ANONYMOUS);
 		
 		List<Authority> auths = Lists.newArrayList(a0, a1, a2, a3, a4);
 		

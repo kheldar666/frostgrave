@@ -16,7 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString(of = {"name","player"},callSuper = true)
+@ToString(of = {"name","player","wizard","apprentice"},callSuper = true)
 public class Warband extends StatefulEntity {
     @Column(length = 50, nullable = false)
     private String name;
@@ -39,5 +39,10 @@ public class Warband extends StatefulEntity {
             orphanRemoval = true
     )
     private Set<Soldier> soldiers = Sets.newHashSet();
+
+    public Warband (String name, User player) {
+        setName(name);
+        setPlayer(player);
+    }
 
 }

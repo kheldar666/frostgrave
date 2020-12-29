@@ -128,12 +128,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements UserSe
 		return getResultfromOptional(result);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.libermundi.theorcs.services.base.BaseService#createNew()
-	 */
-	@Override
-	public User createNew() {
+	private User createNew() {
 		User user = new User();
 		user.setUid(UUID.randomUUID().toString());
 		user.setEnabled(Boolean.FALSE);
@@ -145,6 +140,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements UserSe
 		if(log.isDebugEnabled()){
 			log.debug("Initializing User Data");
 		}
+
 		User rootUser = createNew();
 			rootUser.setUsername("root");
 			rootUser.setPassword("root");
