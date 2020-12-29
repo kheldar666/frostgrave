@@ -21,7 +21,7 @@ public class Warband extends StatefulEntity {
     @Column(length = 50, nullable = false)
     private String name;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private User player;
 
     @OneToOne

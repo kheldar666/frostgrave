@@ -53,7 +53,52 @@ public class WarbandServiceImpl extends AbstractServiceImpl<Warband> implements 
 
         User admin = userService.findByUsername("admin");
 
-        Warband warbandInCampaign = new Warband("The Ketchup Killers", admin);
+        Warband warbandInCampaign = createWarbandInCampaign(admin);
+        Warband warbandStandalone = createWarbandStandalone(admin);
+
+
+        getRepository().save(warbandInCampaign);
+        getRepository().save(warbandStandalone);
+    }
+
+    private Warband createWarbandStandalone(User player) {
+        Warband warbandStandalone = new Warband("The Adepts of Cthulhu", player);
+
+        //First let's create the Wizard
+        Wizard wizard = new Wizard("Blafard le Fade", School.NECROMANCY);
+        wizardService.save(wizard);
+
+        //Then the Apprentice
+        Apprentice apprentice = new Apprentice("Goncale le mou", wizard);
+        apprenticeService.save(apprentice);
+
+        warbandStandalone.setWizard(wizard);
+        warbandStandalone.setApprentice(apprentice);
+
+        Set<Soldier> soldiers = warbandStandalone.getSoldiers();
+
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.THIEF, warbandStandalone));
+
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.THIEF, warbandStandalone));
+
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.THIEF, warbandStandalone));
+
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.THIEF, warbandStandalone));
+
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.ARCHER, warbandStandalone));
+
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.ARCHER, warbandStandalone));
+
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.TREASUREHUNTER, warbandStandalone));
+
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.TREASUREHUNTER, warbandStandalone));
+
+        return warbandStandalone;
+
+    }
+
+    private Warband createWarbandInCampaign(User player) {
+        Warband warbandInCampaign = new Warband("The Ketchup Killers", player);
 
         warbandInCampaign.setCampaign(campaignService.findByName("Demo Campaign"));
 
@@ -70,22 +115,22 @@ public class WarbandServiceImpl extends AbstractServiceImpl<Warband> implements 
 
         Set<Soldier> soldiers = warbandInCampaign.getSoldiers();
 
-            soldiers.add(SoldierFactory.getSoldier(SoldierType.THUG, warbandInCampaign));
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.THUG, warbandInCampaign));
 
-            soldiers.add(SoldierFactory.getSoldier(SoldierType.THUG, warbandInCampaign));
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.THUG, warbandInCampaign));
 
-            soldiers.add(SoldierFactory.getSoldier(SoldierType.THIEF, warbandInCampaign));
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.THIEF, warbandInCampaign));
 
-            soldiers.add(SoldierFactory.getSoldier(SoldierType.THIEF, warbandInCampaign));
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.THIEF, warbandInCampaign));
 
-            soldiers.add(SoldierFactory.getSoldier(SoldierType.INFANTRYMAN, warbandInCampaign));
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.INFANTRYMAN, warbandInCampaign));
 
-            soldiers.add(SoldierFactory.getSoldier(SoldierType.INFANTRYMAN, warbandInCampaign));
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.INFANTRYMAN, warbandInCampaign));
 
-            soldiers.add(SoldierFactory.getSoldier(SoldierType.TREASUREHUNTER, warbandInCampaign));
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.TREASUREHUNTER, warbandInCampaign));
 
-            soldiers.add(SoldierFactory.getSoldier(SoldierType.TREASUREHUNTER, warbandInCampaign));
+        soldiers.add(SoldierFactory.getSoldier(SoldierType.TREASUREHUNTER, warbandInCampaign));
 
-        getRepository().save(warbandInCampaign);
+        return warbandInCampaign;
     }
 }
