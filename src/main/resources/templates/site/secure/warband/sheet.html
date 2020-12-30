@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/portal/index}">
+    <head lang="en">
+        <title th:text="#{pages.secure.warband.sheet.title}">Page Title</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div th:each="soldier : ${}" th:remove="tag">
+                <!--/*/ <th:block th:include="fragments/warband/soldier :: sheet(soldier = ${soldier}"></th:block> /*/-->
+            </div>
+        </div>
+    </body>
+</html>

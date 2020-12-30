@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <block th:fragment="sheet(soldier)">
+            <table class="table table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col" class="bg-info">Soldier</th>
+                        <td colspan="5" th:text="${soldier.name}">Soldier's Name</td>
+                        <th scope="col" class="bg-info">Type</th>
+                        <td colspan="3" th:text="${soldier.soldierType}">Soldier's Type</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Move</th>
+                        <th scope="row">Fight</th>
+                        <th scope="row">Shoot</th>
+                        <th scope="row">Armor</th>
+                        <th scope="row">Will</th>
+                        <th scope="row">Health</th>
+                        <td colspan="4">Current Health</td>
+                    </tr>
+                    <tr>
+                        <td th:text="${soldier.move}">X</td>
+                        <td th:text="${soldier.fight}">X</td>
+                        <td th:text="${soldier.shoot}">X</td>
+                        <td th:text="${soldier.armor}">X</td>
+                        <td th:text="${soldier.will}">X</td>
+                        <td th:text="${soldier.health}">X</td>
+                        <td colspan="4"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">Items (Standard equipment + 1)</td>
+                        <td colspan="4">Notes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </block>
+    </body>
+</html>
