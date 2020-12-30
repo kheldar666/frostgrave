@@ -17,64 +17,62 @@
                     <p th:text="#{pages.error500.msg}">It appears something went wrong</p>
                 </div>
             </div>
-            <section th:if="${exception != null}">
-                <div class="row">
-                    <div class="col-md-4 ml-auto">
-                        <span class="legend">Date</span>
-                    </div>
-                    <div class="col-md-8">
-                        <span th:text="${timestamp}"></span>
-                    </div>
+            <div class="row">
+                <div class="col-md-4 ml-auto">
+                    <span class="legend">Date</span>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 ml-auto">
-                        <span class="legend">Path</span>
-                    </div>
-                    <div class="col-md-8">
-                        <span th:text="${path}"></span>
-                    </div>
+                <div class="col-md-8">
+                    <span th:text="${timestamp}"></span>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 ml-auto">
-                        <span class="legend">Error</span>
-                    </div>
-                    <div class="col-md-8">
-                        <span th:text="${error}"></span>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ml-auto">
+                    <span class="legend">Path</span>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 ml-auto">
-                        <span class="legend">Status</span>
-                    </div>
-                    <div class="col-md-8">
-                        <span th:text="${status}"></span>
-                    </div>
+                <div class="col-md-8">
+                    <span th:text="${path}"></span>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 ml-auto">
-                        <span class="legend">Message</span>
-                    </div>
-                    <div class="col-md-8">
-                        <span th:text="${message}"></span>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ml-auto">
+                    <span class="legend">Error</span>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 ml-auto">
-                        <span class="legend">Exception</span>
-                    </div>
-                    <div class="col-md-8">
-                        <span th:text="${exception}"></span>
-                    </div>
+                <div class="col-md-8">
+                    <span th:text="${error}"></span>
                 </div>
-                <div class="row" th:if="${trace != null}">
-                    <div class="col-md-4 ml-auto">
-                        <span class="legend">Trace</span>
-                    </div>
-                    <div class="col-md-8">
-                        <span th:text="${trace}"></span>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ml-auto">
+                    <span class="legend">Status</span>
                 </div>
-            </section>
+                <div class="col-md-8">
+                    <span th:text="${status}"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ml-auto">
+                    <span class="legend">Message</span>
+                </div>
+                <div class="col-md-8">
+                    <span th:text="${message}"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ml-auto">
+                    <span class="legend">Exception</span>
+                </div>
+                <div class="col-md-8">
+                    <span th:text="${exception}"></span>
+                </div>
+            </div>
+            <div class="row" th:if="${trace != null}">
+                <div class="col-md-4 ml-auto">
+                    <span class="legend">Trace</span>
+                </div>
+                <div class="col-md-8">
+                    <span th:text="${trace}"></span>
+                </div>
+            </div>
         </div>
     </body>
 </html>
