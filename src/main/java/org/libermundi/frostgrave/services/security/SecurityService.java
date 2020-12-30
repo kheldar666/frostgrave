@@ -3,6 +3,8 @@ package org.libermundi.frostgrave.services.security;
 import org.libermundi.frostgrave.domain.jpa.security.RememberMeToken;
 import org.libermundi.frostgrave.domain.jpa.security.User;
 
+import org.springframework.security.acls.domain.BasePermission;
+import org.springframework.security.acls.model.Permission;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -98,4 +100,44 @@ public interface SecurityService extends UserDetailsService {
 	 * @param role
 	 */
 	void removeRole(User user, String role);
+
+	// ~ ACL MANAGEMENT -----------------------------------------------------------
+	/**
+	 * Basic Method to set ACL
+	 * @param owner Owner of the Acl
+	 * @param to Object on which ACL applies
+	 * @param permission {@link BasePermission} applied
+	 * @param granting set to true when the right is granted, false when revoked
+	 */
+	void setAcl(Object owner, Object to, Permission permission, boolean granting);
+
+	/**
+	 * Grant {@link BasePermission#ADMINISTRATION}, {@link BasePermission#WRITE} and {@link BasePermission#READ} to Owner
+	 * @param owner
+	 * @param to
+	 */
+	void grantAdminAcl(Object owner, Object to);
+
+	/**
+	 * Grant {@link BasePermission#WRITE} and {@link BasePermission#READ} to Owner
+	 * @param owner
+	 * @param to
+	 */
+	void grantReadWriteAcl(Object owner, Object to);
+
+	/**
+	 * Grant {@link BasePermission#READ} to Owner
+	 * @param owner
+	 * @param to
+	 */
+	void grantReadAcl(Object owner, Object to);
+
+	/**
+	 * Check if the currently logged User as the given {@link Permission} on the {@link Object}
+	 * @param obj
+	 * @param permission
+	 * @return true if User has.
+	 */
+	boolean hasPermission(Object obj, Permission... permission);
+
 }

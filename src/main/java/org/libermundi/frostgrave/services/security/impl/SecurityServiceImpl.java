@@ -9,6 +9,12 @@ import org.libermundi.frostgrave.services.security.UserService;
 import org.libermundi.frostgrave.constants.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.acls.AclPermissionEvaluator;
+import org.springframework.security.acls.domain.BasePermission;
+import org.springframework.security.acls.domain.GrantedAuthoritySid;
+import org.springframework.security.acls.domain.ObjectIdentityImpl;
+import org.springframework.security.acls.domain.PrincipalSid;
+import org.springframework.security.acls.model.*;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -43,13 +49,21 @@ public class SecurityServiceImpl implements SecurityService {
 
 	private final AuthorityService authorityService;
 
+	private final MutableAclService aclServices;
+
+	private final AclPermissionEvaluator aclPermissionEvaluator;
+
 	@Autowired
 	public SecurityServiceImpl(AuthorityService authorityService,
 							   UserService userService,
-							   RememberMeServices rememberMeServices) {
+							   RememberMeServices rememberMeServices,
+							   MutableAclService aclService,
+							   AclPermissionEvaluator permissionEvaluator) {
 		this.authorityService=authorityService;
 		this.userService = userService;
 		this.rememberMeServices = rememberMeServices;
+		this.aclServices = aclService;
+		this.aclPermissionEvaluator = permissionEvaluator;
 	}
 
 	/* (non-Javadoc)
@@ -233,6 +247,72 @@ public class SecurityServiceImpl implements SecurityService {
 			roles.remove(oldRole);
 			userService.save(user);
 		}
+	}
+
+	// ~ ACL Management ------------------------------------------------------------------------------------
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.libermundi.theorcs.security.services.SecurityManager#setAcl(java.lang.Object, java.lang.Object, org.springframework.security.acls.model.Permission, boolean)
+	 */
+	@Override
+	public void setAcl(Object owner, Object to, Permission permission, boolean granting) {
+		ObjectIdentity oi = new ObjectIdentityImpl(to);
+		Sid sid;
+		if(owner instanceof User) {
+			sid = new PrincipalSid(((User)owner).getUsername());
+		} else {
+			sid = new GrantedAuthoritySid(((Authority)owner).getAuthority());
+		}
+
+		MutableAcl acl;
+		try {
+			acl = (MutableAcl)aclServices.readAclById(oi);
+		} catch (NotFoundException e) {
+			acl = aclServices.createAcl(oi);
+		}
+
+		acl.insertAce(acl.getEntries().size(), permission, sid, granting);
+		aclServices.updateAcl(acl);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.libermundi.theorcs.security.services.SecurityManager#grantAdminAcl(java.lang.Object, java.lang.Object)
+	 */
+	@Override
+	public void grantAdminAcl(Object owner, Object to) {
+		this.setAcl(owner, to, BasePermission.ADMINISTRATION, Boolean.TRUE);
+		grantReadWriteAcl(owner,to);
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.libermundi.theorcs.security.services.SecurityManager#grantReadWriteAcl(java.lang.Object, java.lang.Object)
+	 */
+	@Override
+	public void grantReadWriteAcl(Object owner, Object to) {
+		this.setAcl(owner, to, BasePermission.WRITE, Boolean.TRUE);
+		grantReadAcl(owner, to);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.libermundi.theorcs.security.services.SecurityManager#grantReadAcl(java.lang.Object, java.lang.Object)
+	 */
+	@Override
+	public void grantReadAcl(Object owner, Object to) {
+		this.setAcl(owner, to, BasePermission.READ, Boolean.TRUE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.libermundi.theorcs.security.services.SecurityManager#hasPermission(java.lang.Object, org.springframework.security.acls.model.Permission[])
+	 */
+	@Override
+	public boolean hasPermission(Object obj, Permission... permission) {
+		return aclPermissionEvaluator.hasPermission(getCurrentAuthentication(), obj, permission);
 	}
 
 	// ~ ----------------------------------------------------------------------------------------------------
