@@ -7,6 +7,7 @@ import org.libermundi.frostgrave.domain.jpa.warband.*;
 import org.libermundi.frostgrave.repositories.warband.WarbandRepository;
 import org.libermundi.frostgrave.services.base.impl.AbstractServiceImpl;
 import org.libermundi.frostgrave.services.campaign.CampaignService;
+import org.libermundi.frostgrave.services.security.SecurityService;
 import org.libermundi.frostgrave.services.security.UserService;
 import org.libermundi.frostgrave.services.warband.ApprenticeService;
 import org.libermundi.frostgrave.services.warband.SoldierService;
@@ -28,17 +29,18 @@ public class WarbandServiceImpl extends AbstractServiceImpl<Warband> implements 
     private final CampaignService campaignService;
     private final WizardService wizardService;
     private final ApprenticeService apprenticeService;
-    private final SoldierService soldierService;
+    private final SecurityService securityService;
 
     public WarbandServiceImpl(UserService userService, CampaignService campaignService,
                               WizardService wizardService, ApprenticeService apprenticeService,
-                              SoldierService soldierService, WarbandRepository warbandRepository) {
+                              SoldierService soldierService, WarbandRepository warbandRepository,
+                              SecurityService securityService) {
         setRepository(warbandRepository, Warband.class);
         this.userService = userService;
         this.campaignService = campaignService;
         this.wizardService = wizardService;
         this.apprenticeService = apprenticeService;
-        this.soldierService = soldierService;
+        this.securityService = securityService;
 
     }
 
@@ -59,6 +61,11 @@ public class WarbandServiceImpl extends AbstractServiceImpl<Warband> implements 
 
         getRepository().save(warbandInCampaign);
         getRepository().save(warbandStandalone);
+
+        securityService.grantReadWriteAcl(admin, warbandInCampaign);
+        securityService.grantReadWriteAcl(admin, warbandStandalone);
+
+
     }
 
     private Warband createWarbandStandalone(User player) {

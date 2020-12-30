@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <head lang="en">
+            <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE" th:text="#{product.name}">FCM</title>
+            <!--/*/ <th:block th:include="/layout/portal/inc/scripts :: header"></th:block> /*/-->
+        </head>
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="/layout/portal/inc/navs :: topnav-min"></th:block> /*/-->
+
+        <div class="container-fluid " id="maincontainer">
+            <div class="row my-3 mx-3">
+                <div class="col border">
+                    <section layout:fragment="content" th:remove="tag">
+                        Display Error Section
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!--/*/ <th:block th:include="/layout/portal/inc/navs :: footer"></th:block> /*/-->
+
+    </body>
+</html>

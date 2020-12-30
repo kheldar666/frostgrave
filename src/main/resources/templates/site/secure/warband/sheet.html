@@ -7,8 +7,8 @@
     </head>
     <body>
         <div layout:fragment="content">
-            <div th:each="soldier : ${}" th:remove="tag">
-                <!--/*/ <th:block th:include="fragments/warband/soldier :: sheet(soldier = ${soldier}"></th:block> /*/-->
+            <div th:each="soldier : ${warband.soldiers}" th:remove="tag">
+                <!--/*/ <th:block th:include="fragments/warband/soldier :: sheet(soldier = ${soldier})"></th:block> /*/-->
             </div>
         </div>
     </body>

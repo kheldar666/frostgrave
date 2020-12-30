@@ -44,5 +44,7 @@ public class CampaignServiceImpl extends AbstractServiceImpl<Campaign> implement
             campaign1.setAdmin(admin);
 
         getRepository().save(campaign1);
+
+        securityService.grantReadWriteAcl(admin, campaign1);
     }
 }
