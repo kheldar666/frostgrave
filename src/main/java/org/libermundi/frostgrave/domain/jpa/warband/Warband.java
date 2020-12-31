@@ -1,6 +1,6 @@
 package org.libermundi.frostgrave.domain.jpa.warband;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import org.libermundi.frostgrave.domain.jpa.campaign.Campaign;
 import org.libermundi.frostgrave.domain.jpa.security.User;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Getter
@@ -38,7 +38,8 @@ public class Warband extends StatefulEntity {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-    private Set<Soldier> soldiers = Sets.newHashSet();
+    @OrderColumn
+    private List<Soldier> soldiers =  Lists.newArrayList();
 
     public Warband (String name, User player) {
         setName(name);

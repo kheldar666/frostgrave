@@ -82,7 +82,7 @@ public class WarbandServiceImpl extends AbstractServiceImpl<Warband> implements 
         warbandStandalone.setWizard(wizard);
         warbandStandalone.setApprentice(apprentice);
 
-        Set<Soldier> soldiers = warbandStandalone.getSoldiers();
+        List<Soldier> soldiers = warbandStandalone.getSoldiers();
 
         soldiers.add(SoldierFactory.getSoldier(SoldierType.THIEF, warbandStandalone));
 
@@ -120,7 +120,7 @@ public class WarbandServiceImpl extends AbstractServiceImpl<Warband> implements 
         warbandInCampaign.setWizard(wizard);
         warbandInCampaign.setApprentice(apprentice);
 
-        Set<Soldier> soldiers = warbandInCampaign.getSoldiers();
+        List<Soldier> soldiers = warbandInCampaign.getSoldiers();
 
         soldiers.add(SoldierFactory.getSoldier(SoldierType.THUG, warbandInCampaign));
 
