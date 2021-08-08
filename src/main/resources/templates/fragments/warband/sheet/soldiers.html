@@ -9,17 +9,17 @@
                     <tr>
                         <th scope="col" class="bg-info" th:text="#{fragments.warband.sheet.soldiers.soldier}">Soldier</th>
                         <th scope="col" colspan="5" th:text="${soldier.name}">Soldier's Name</th>
-                        <th scope="col" class="bg-info" th:text="#{fragments.warband.soldiers.type}">Type</th>
+                        <th scope="col" class="bg-info" th:text="#{fragments.warband.sheet.soldiers.type}">Type</th>
                         <th scope="col" colspan="3" th:text="#{${'soldier.type.' + soldier.soldierType}}">Soldier's Type</th>
                     </tr>
                     <tr>
-                        <th scope="row" th:text="#{fragments.warband.move}">Move</th>
-                        <th scope="row" th:text="#{fragments.warband.fight}">Fight</th>
-                        <th scope="row" th:text="#{fragments.warband.shoot}">Shoot</th>
-                        <th scope="row" th:text="#{fragments.warband.armor}">Armor</th>
-                        <th scope="row" th:text="#{fragments.warband.will}">Will</th>
-                        <th scope="row" th:text="#{fragments.warband.health}">Health</th>
-                        <td colspan="4" th:text="#{fragments.warband.curenthealth}">Current Health</td>
+                        <th scope="row" th:text="#{fragments.warband.sheet.move}">Move</th>
+                        <th scope="row" th:text="#{fragments.warband.sheet.fight}">Fight</th>
+                        <th scope="row" th:text="#{fragments.warband.sheet.shoot}">Shoot</th>
+                        <th scope="row" th:text="#{fragments.warband.sheet.armor}">Armor</th>
+                        <th scope="row" th:text="#{fragments.warband.sheet.will}">Will</th>
+                        <th scope="row" th:text="#{fragments.warband.sheet.health}">Health</th>
+                        <td colspan="4" th:text="#{fragments.warband.sheet.curenthealth}">Current Health</td>
                     </tr>
                     <tr>
                         <td th:text="${soldier.move}">X</td>
